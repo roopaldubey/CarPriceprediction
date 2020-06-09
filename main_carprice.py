@@ -22,6 +22,7 @@ model = pickle.load(open('finalized_model.sav', 'rb'))
 def loginblock():
     msg=' '
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+		
         username = request.form['username']
         password = request.form['password']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
