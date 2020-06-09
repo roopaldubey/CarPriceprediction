@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+*{
+    outline: none;
+    font-family: 'Comfortaa', cursive;
+}
+
+body{
+    background-image: url(indiancar2.jpg);
+    background-size: cover;
+}
+
+.formfill{
+
+    width:70%;
+    height:680px;
+    margin-top:300px;
+    background:rgba(0, 0, 0, 0.8);
+    color: black;
+    transform : translate(-50%,-50%);
+    box-sizing:border-box;
+    float:right;
+    margin-left: 100px;
+    padding:50px 100px;
+
+}
+
+.headings{
+    color: white;
+    font-size: 20px;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.col1{
+    width:33%;
+    background:rgba(255, 255, 255, 0.2);
+    height:450px;
+    float:left;
+}
+.choicetext{
+    color: white;
+}

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+*{
+    outline: none;
+    font-family: 'Comfortaa', cursive;
+}
+
+body{
+    background-image: url(indiancar2.jpg);
+    background-size: cover;
+}
+
+.register{
+    width:650px;
+    height:700px;
+    margin-top:400px;
+    margin-right:50px;
+    background:rgba(0, 0, 0, 0.8);
+    color: black;
+    transform : translate(-50%,-50%);
+    box-sizing:border-box;
+    float:right;
+    padding:50px 100px;
+}
+
+.col2{
+
+    width: 50%;
+    float:left;
+    height:250px;
+    border: none;
+    margin-top: 20px;
+    padding :0px;
+    background:rgba(225, 255, 255, 0.2);
+
+}
+
+.col2 input{
+    border-radius:30px;
+    border: none;
+    padding: 25px 40px;
+    float: left;
+    background-color: white;
+    color:black;
+    margin-top: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.heading{
+	margin-top: 10px;
+	text-decoration: underline;
+}
+.choicetext{
+	margin-top: 10px;
+	color:white;
+}
