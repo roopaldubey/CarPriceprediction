@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/desiciontreeform.css')}}">
+    <script src="https://kit.fontawesome.com/813db723b2.js" crossorigin="anonymous"></script>
+    <title>Decision Tree</title>
+</head>
+<body>
+	<div class="formfill">
+		<h1 class="choicetext">Used Car Price by Decision Tree Algorithm</h1>
+		<form action="{{ url_for('predictDtree') }}" method="post">
+			<div class="col1">
+			<label class="headings" for="make">Make </label><br><br>
+			<select class="option_selection" name="make">
+				<option value="0">Acura</option>
+				<option value="1">Alfa Romeo</option>
+				<option value="3">Audi </option>
+				<option value="4">BMW </option>
+				<option value="9">Chevrolet </option>
+				<option value="43">Suzuki </option>
+				<option value="45">Toyota </option>
+				<option value="18">Honda </option>
+				<option value="19">Hyundai </option>
+				<option value="47">Volvo </option>
+				<option value="29">Mazda </option>
+				<option value="14">Ford </option>
+				<option value="12">FIAT </option>
+				<option value="21">Kia </option>
+				<option value="32">Nissan </option>
+			</select><br><br><br>
+			<label class="headings" for="model">Model </label><br><br>
+			<select class="option_selection" name="model">
+				<option value="166">CL(Acura) </option>
+				<option value="440">ILX(Acura) </option>
+				<option value="441">ILX Hybrid(Acura) </option>
+				<option value="445">Integra(Acura) </option>
+				<option value="859">Vigor(Acura) </option>
+				<option value="2">100(Audi) </option>
+				<option value="7">200(Audi) </option>
+				<option value="30">4C(Alfa Romeo) </option>
+				<option value="1">1 Series M(BMW) </option>
+				<option value="119">Astro Cargo(Chevrolet) </option>
+				<option value="121">Avalanche(Chevrolet) </option>
+				<option value="883">XL7(Suzuki) </option>
+				<option value="106">Aerio(Suzuki) </option>
+				<option value="862">Vitara(Suzuki) </option>
+				<option value="879">XC90(Suzuki) </option>
+				<option value="31">4Runner(Toyota) </option>
+				<option value="122">Avalon(Toyota) </option>
+				<option value="192">Camry(Toyota) </option> 
+				<option value="193">Camry Hybrid(Toyota) </option>
+				<option value="891">Yaris(Toyota) </option>
+				<option value="892">Yaris iA(Toyota) </option>
+				<option value="99">Accord Crosstour(Honda) </option>
+				<option value="105">ActiveHybrid X6(Honda) </option>
+				<option value="695">S2000(Honda) </option>
+				<option value="682">Ridgeline(Honda) </option>
+				<option value="96">Accent(Hyundai) </option>
+				<option value="829">Tucson(Hyundai) </option>
+				<option value="880">XG300(Hyundai) </option>
+				<option value="9">240(Volvo) </option>
+				<option value="877">XC60(Volvo) </option>
+				<option value="5">2(Mazda) </option>
+				<option value="826">Tribute(Mazda) </option>
+				<option value="107">Aerostar(Ford) </option>
+				<option value="865">Windstar(Ford) </option>
+				<option value="3">124 Spider(FIAT) </option>
+				<option value="35">500(FIAT) </option>
+				<option value="113">Amanti(Kia) </option>
+				<option value="773">Sportage(Kia) </option>
+				<option value="776">Stanza(Nissan) </option>
+				<option value="890">Xterra(Nissan) </option>
+			</select><br><br><br>
+
+
+			<label class="headings" for="year">Year  </label><br><br>
+			<input type="number" name="year" placeholder="Car Purchase Year"><br><br><br>
+
+			<label class="headings" for="engine_fuel_type">Engine Fuel Type </label><br><br>
+			<select class="option_selection" name="engine_fuel_type">
+				<option value="0">Diesel </option>
+				<option value="1">Electric </option>
+				<option value="2">Flex-Fuel </option>
+				<option value="3">Natural Gas </option>
+				<option value="4">Petrol </option>
+				<option value="5">Premium Unleaded </option>
+				<option value="6">Regular Unleaded </option>
+			</select><br><br><br>
+		    </div>
+		    <div class="col1">
+			<label class="headings" for="engine_hp">Engine HP </label><br><br>
+			<input type="number" name="engine_hp" placeholder="Engine HP"><br><br><br>
+
+			<label class="headings" for="engine_cylinder">Engine Cylinder </label><br><br>
+			<input type="number" name="engine_cylinder" placeholder="Engine_Cylinder"><br><br><br>
+
+			<label class="headings" for="trnsmsntyp">Transmission Type </label><br><br>
+			<select class="option_selection" name="trnsmsntyp">
+				<option value="0">Automated Manual </option>
+				<option value="1">Automatic </option>
+				<option value="2">Direct Drive </option>
+				<option value="3">Manual </option>
+				<option value="4">Unknown </option>
+			</select><br><br><br>
+
+			<label class="headings" for="vehiclesize">Vehicle Size </label><br><br>
+			<select class="option_selection" name="vehiclesize">
+				<option value="0">Compact </option>
+				<option value="1">Large </option>
+				<option value="2">Midsize </option>
+			</select><br><br><br>
+
+		    </div>
+		    <div class="col1">
+			<label class="headings" for="vehiclestyle">Vehicle Style </label><br><br>
+			<select class="option_selection" name="vehiclestyle">
+				<option value="0">2dr Hatchback </option>
+				<option value="1">2dr SUV </option>
+				<option value="2">4dr Hatchback </option>
+				<option value="3">4dr SUV </option>
+				<option value="4">Cargo Minivan </option>
+				<option value="5">Cargo Van </option>
+				<option value="6">Convertible </option>
+				<option value="8">Coupe </option>
+				<option value="12">Passenger Van </option>
+				<option value="14">Sedan </option>
+				<option value="15">Wagon </option>
+			</select><br><br><br>
+
+			<label class="headings">Highway MPG </label><br><br>
+			<input type="number" name="highway_mpg" placeholder="highway_mpg"><br><br><br>
+
+			<label class="headings">City MPG </label><br><br>
+			<input type="number" name="city_mpg" placeholder="city_mpg"><br><br><br>
+
+			<label class="headings">Popularity </label><br><br>
+			<input type="number" name="popularity" placeholder="popularity"><br><br><br><br><br>
+			<input type="submit" value="predict">
+		    </div>
+		</form>
+
+		<br>
+   <br>
+   <h1 class="choicetext">{{ prediction_text }}</h1>
+   </div>
+  
+	
+</body>
+</html>

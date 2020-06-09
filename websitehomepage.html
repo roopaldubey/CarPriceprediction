@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>CarPrice</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='styles/pagedesign.css')}}">
+        <script src="https://kit.fontawesome.com/813db723b2.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <header>
+
+            <div class="col3">
+                <h1>CarPrice</h1>
+            </div>
+
+            <div class="col3">
+                <div class="wrapper">
+                    <input class= "input" type="text" placeholder="Enter the brand name" name="brandname" id="brandname">
+                    <div class ="search-btn">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col3">
+                <a href="{{url_for('registerpage')}}" class="registerbtn">Register</a>
+            </div>
+
+        </header>
+
+        <ul>
+
+            <li><a>About</a>
+                <ul>
+                    <li><a>Our Team</a></li>
+                    <li><a>Office</a></li>
+                    <li><a>Contact</a></li>
+                    <li><a>Vision & Mission</a></li>
+                </ul>
+            </li>
+
+            <li><a>Home</a></li>
+            <li><a>News</a>
+                <ul>
+                    <li><a>Mentions</a></li>
+                    <li><a>Related</a></li>
+                </ul>
+            </li>
+
+            <li><a>Rent</a>
+                <ul>
+                    <li><a>New Cars</a></li>
+                    <li><a>Used Cars</a></li>
+                </ul>
+            </li>
+
+            <li><a>New Cars</a>
+                <ul>
+                    <li><a>Latest Cars</a></li>
+                    <li><a>Popular Cars</a></li>
+                    <li><a>Upcoming Cars</a></li>
+                </ul>
+            </li>
+            
+            <li><a>Used Cars</a>
+                <ul>
+                    <li><a>Cars in City</a></li>
+                    <li><a>Search Used Cars</a></li>
+                    <li><a>Used Cars</a></li>
+                    <li><a>Evaluation</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        
+        <div class="Login-box">
+            <img src="\static\styles\avatarnew.jpg" class="avatar">
+            <h2>Login here</h2>
+            <form action="{{ url_for('loginblock') }}" method=post>
+                <p>Username</p>
+                <input type="text" placeholder="Enter the username" required name="username"><br>
+                <p>Password</p>
+                <input type="password" placeholder="password" required name="password"><br><br>
+                <a href="#">Forget Password</a><br><br>
+                <input type="submit">    
+                <div class="msg">{{ msg }}</div><br><br>        
+            </form>
+        </div>
+
+    </body>
+</html>

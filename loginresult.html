@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/choiceformdesign.css')}}">
+    <script src="https://kit.fontawesome.com/813db723b2.js" crossorigin="anonymous"></script>
+    <title>LoginResult</title>
+</head>
+<body>
+    <div class = "register">
+        <h1 class="choicetext">{{ msg }}</h1><br>
+        <h2 class="choicetext"> You are at right place to make your deal</h2>
+        <h3 class="choicetext">Choose one of the following Algorithm to get Result</h3>
+        <div class= "col2">
+            <h4 class="heading">Decision Tree Algorithm</h4>
+            <h4>Classify data on the basis of features(if else) </h4>
+        	<a href="{{url_for('predictDtree')}}"><input class="processbtn" type="submit" value="Decision Tree"></a>
+        </div>
+        <div class="col2">
+            <h4 class="heading">Random Forest Algorithm</h4>
+            <h4>It is combination of Decision Trees</h4>
+        	<a href="{{url_for('predictRforest')}}"><input class="processbtn" type="submit" value="Random Forest"></a>
+        </div>
+    </div>
+</body>
+</html>

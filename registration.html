@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Registration Form </title>
+	<link rel="stylesheet" href="{{url_for('static', filename='styles/pagedesign.css')}}">
+	<script src="https://kit.fontawesome.com/813db723b2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="register">
+		<h1 id="regcolor">Registration form</h1>
+		<form action="{{ url_for('registerpage') }}" method=post autocomplete="off">
+			<label for="username">Username</label><br><br>
+			<input class ="entry" type="text" placeholder="enter your name" required id="username" name="username"><br><br><br>
+
+			<label for="email">Email Id</label><br><br>
+			<input class="entry" type="email" placeholder="email _ id" required id="email" name="email"><br><br><br>
+
+			<label for="password">Enter the password</label><br><br>
+			<input class="entry" type="password" placeholder="set password" required id="password" name="password"><br><br><br>
+
+			<div class="msg">{{ msg }}</div><br><br>
+			<input class="regbtn" type="submit" value="Register">
+		</form>
+	</div>
+</body>
+</html>
