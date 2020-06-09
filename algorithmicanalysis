@@ -1,0 +1,1112 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+
+# In[2]:
+
+
+df=pd.read_csv(r"C:\Users\ROOPAL\Downloads\cardata.csv\data.csv")
+
+
+# In[3]:
+
+
+df.head()
+
+
+# In[4]:
+
+
+df.count()
+
+
+# All columns have 11914 values except 'Market Category' , 'Engine HP','Engine Fuel Type','Engine Cylinders'
+
+# In[5]:
+
+
+df['Make'].nunique()
+
+
+# In[6]:
+
+
+df['Model'].nunique()
+
+
+# Some values have string characters as entry so to apply mathematical operation there is a need to convert it to numerical 
+# values 
+
+# In[7]:
+
+
+df['Market Category'].nunique()
+
+
+# In[8]:
+
+
+df['Engine Fuel Type'].nunique()
+
+
+# In[9]:
+
+
+df['Transmission Type'].nunique()
+
+
+# In[10]:
+
+
+df['Transmission Type'].unique()
+
+
+# In[11]:
+
+
+from sklearn.preprocessing import LabelEncoder
+labelencoder_X = LabelEncoder()
+df['Transmission Type'] = labelencoder_X.fit_transform(df['Transmission Type'])
+
+
+# In[12]:
+
+
+df['Transmission Type'].nunique()
+
+
+# This converts the column values to numbers such as 0,1,2,3
+
+# In[13]:
+
+
+df['Transmission Type'].unique()
+
+
+# In[14]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                       labelencoder_X.transform(labelencoder_X.classes_))) 
+
+
+# In[15]:
+
+
+mapping_dict={}
+mapping_dict['Make']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[16]:
+
+
+df.isnull().sum()
+
+
+# It's important to convert the null values to some substantial information so that the prediction should be strengthened
+
+# In[17]:
+
+
+df['Make'].unique()
+
+
+# In[18]:
+
+
+df['Make'].max()
+
+
+# In[19]:
+
+
+df['Make'].fillna("Volvo",inplace=True)
+
+
+# filling null values with the most occuring value of the column
+
+# In[20]:
+
+
+df['Make'] = labelencoder_X.fit_transform(df['Make'])
+df['Make'].head()
+
+
+# In[21]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                       labelencoder_X.transform(labelencoder_X.classes_))) 
+ 
+
+
+# In[22]:
+
+
+mapping_dict={}
+mapping_dict['Make']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[23]:
+
+
+df['Make'].unique()
+
+
+# In[24]:
+
+
+df['Engine HP'].fillna((df['Engine HP'].mean()), inplace=True)
+
+
+# In[25]:
+
+
+df['Engine Fuel Type'].unique()
+
+
+# In[26]:
+
+
+df['Engine Fuel Type'].unique()
+
+
+# In[27]:
+
+
+df.replace(['premium unleaded (required)','premium unleaded (recommended)'],['premium_unleaded','premium_unleaded'],inplace=True)
+
+
+# In[28]:
+
+
+df.replace(['regular unleaded'],['regular_unleaded'],inplace=True)
+
+
+# In[29]:
+
+
+df.replace(['flex-fuel (unleaded/E85)'],['flex_fuel'],inplace=True)
+
+
+# In[30]:
+
+
+df.replace([ 'flex-fuel (premium unleaded recommended/E85)','flex-fuel (premium unleaded required/E85)',
+            'flex-fuel (unleaded/natural gas)'],['flex_fuel','flex_fuel','flex_fuel'],inplace=True)
+
+
+# In[31]:
+
+
+df['Engine Fuel Type'].fillna("petrol",inplace=True)
+
+
+# In[32]:
+
+
+df['Engine Fuel Type'] = labelencoder_X.fit_transform(df['Engine Fuel Type'])
+df['Engine Fuel Type'].head()
+
+
+# In[33]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                       labelencoder_X.transform(labelencoder_X.classes_))) 
+
+
+# In[34]:
+
+
+mapping_dict={}
+mapping_dict['Make']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[35]:
+
+
+df['Engine Fuel Type'].isnull().sum()
+
+
+# In[36]:
+
+
+df['Engine Fuel Type'].head()
+
+
+# In[37]:
+
+
+df['Model'].max()
+
+
+# In[38]:
+
+
+df['Model'].nunique()
+
+
+# In[39]:
+
+
+df['Model'] = labelencoder_X.fit_transform(df['Model'])
+df['Model'].head()
+
+
+# In[40]:
+
+
+df['Model'].max()
+
+
+# In[41]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                       labelencoder_X.transform(labelencoder_X.classes_))) 
+
+
+# In[42]:
+
+
+mapping_dict={}
+mapping_dict['Model']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[43]:
+
+
+df['Engine Cylinders'].unique()
+
+
+# In[44]:
+
+
+df['Engine Cylinders'].nunique()
+
+
+# In[45]:
+
+
+df['Engine Cylinders'].fillna((df['Engine Cylinders'].mean()), inplace=True)
+df['Engine Cylinders'].isnull().sum()
+
+
+# In[46]:
+
+
+df.drop(labels='Market Category',axis=1,inplace=True)
+df.drop(labels='Driven_Wheels',axis=1,inplace=True)
+df.drop(labels='Number of Doors',axis=1,inplace=True)
+df.head()
+
+
+# In[47]:
+
+
+df['Vehicle Size'].unique()
+
+
+# In[48]:
+
+
+df['Vehicle Size'] = labelencoder_X.fit_transform(df['Vehicle Size'])
+
+
+# In[49]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                        labelencoder_X.transform(labelencoder_X.classes_))) 
+mapping_dict={}
+mapping_dict['Make']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[50]:
+
+
+df['Vehicle Style'].unique()
+
+
+# In[51]:
+
+
+df['Vehicle Style'] = labelencoder_X.fit_transform(df['Vehicle Style'])
+
+
+# In[52]:
+
+
+le_name_mapping = dict(zip(labelencoder_X.classes_, 
+                        labelencoder_X.transform(labelencoder_X.classes_))) 
+mapping_dict={}
+mapping_dict['Make']= le_name_mapping 
+print(mapping_dict)
+
+
+# In[53]:
+
+
+df['Year'] = 2019 -df['Year']
+
+
+# In[54]:
+
+
+df.columns
+
+
+# In[55]:
+
+
+X=df.iloc[:,:12]
+X_val=df.iloc[:,:12]
+y=df.iloc[:,12]
+print(y.head())
+print(X.head().dtypes)
+
+
+# In[56]:
+
+
+print(X.columns)
+print("----------")
+X.dtypes
+
+
+# In[57]:
+
+
+print(X.iloc[[1, 3, 5, 6], [1, 3]])
+
+
+# In[58]:
+
+
+X.Model.head()
+
+
+# In[59]:
+
+
+y.head()
+
+
+# In[60]:
+
+
+from sklearn.preprocessing import StandardScaler
+sc_X = StandardScaler()
+X = sc_X.fit_transform(X)
+
+
+# # Linear Regression
+
+# In[61]:
+
+
+import statsmodels.formula.api as smf
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+
+# In[62]:
+
+
+sns.pairplot(df, x_vars=['Make', 'Model', 'Year'], y_vars='MSRP', height=3, aspect=0.9)
+
+
+# features that minimizes least square sum are taken as the features for linear regression
+
+# In[63]:
+
+
+sns.pairplot(df, x_vars=['Engine Fuel Type', 'Engine HP',
+       'Engine Cylinders'], y_vars='MSRP', height=3, aspect=0.9)
+
+
+# In[64]:
+
+
+sns.pairplot(df, x_vars=['Transmission Type', 'Vehicle Size',
+       'Vehicle Style'], y_vars='MSRP', height=3, aspect=0.9)
+
+
+# In[65]:
+
+
+sns.pairplot(df, x_vars=['highway MPG', 'city mpg', 'Popularity'], y_vars='MSRP', height=3, aspect=0.9)
+
+
+# In linear regression we do not require much of preprocessing 
+# Simple linear regression is an approach for predicting a quantitative response using a single feature (or "predictor" or "input variable")
+
+# In[66]:
+
+
+
+X_val.head()
+
+
+# In[67]:
+
+
+
+max=0;
+for column in X_val:
+    print("-----------")
+    print(column)
+
+    feature_cols = [column]
+    X_reg = df[feature_cols]
+    y_reg = df.MSRP
+
+    from sklearn.model_selection import train_test_split
+    X_reg_train, X_reg_test, y_reg_train, y_reg_test =  train_test_split(X_reg,y_reg,test_size = 0.2, random_state= 0)
+
+    # instantiate and fit
+    lm = LinearRegression()
+    lm.fit(X_reg_train, y_reg_train)
+    print(" ")
+    
+    # print the coefficients
+    print("The coefficients")
+    print("intercept:")
+    print(lm.intercept_)
+    print("coefficient:")
+    print(lm.coef_)
+    y_reg_pred=lm.predict(X_reg_test)
+   
+    #Accuracy classification score.
+    #In multilabel classification, this function computes subset accuracy: the set of labels predicted for a 
+    #sample must exactly match the corresponding set of labels.
+    #R2 model
+    #The threshold for a good R-squared value depends widely on the domain
+    #Therefore, it's most useful as a tool for comparing different models
+    #R^2 (coefficient of determination) regression score function
+    
+    print(" ")
+    print("The r2_score of the predicted value")
+    print(metrics.r2_score(y_reg_test,y_reg_pred)*100)
+    if metrics.r2_score(y_reg_test,y_reg_pred)*100 > max :
+        max=metrics.r2_score(y_reg_test,y_reg_pred)*100
+        max_column=column
+        mse=metrics.mean_squared_error(y_reg_test,y_reg_pred)
+        
+        
+    print("--------------------------------------------------------------------------------------------------------------------")
+
+
+# In[68]:
+
+
+print(max_column)
+print("r2_score")
+print(max)
+print("mse")
+print(mse)
+
+
+# The accuracy obtained by the linear regression model is 50% with df['Engine HP'] as the independent feature
+
+# In[69]:
+
+
+X_reg = df[['Engine HP']]
+y_reg = df[['MSRP']]
+
+from sklearn.model_selection import train_test_split
+X_reg_train, X_reg_test, y_reg_train, y_reg_test =  train_test_split(X_reg,y_reg,test_size = 0.2, random_state= 0)
+
+# instantiate and fit
+lm = LinearRegression()
+
+lm.fit(X_reg_train, y_reg_train)
+y_reg_pred=lm.predict(X_reg_test)
+
+print("MSE", metrics.mean_squared_error(y_reg_test, y_reg_pred))
+
+
+# In[70]:
+
+
+plt.scatter(X_reg_test,y_reg_pred)
+plt.plot(X_reg_test, y_reg_pred, color='red')
+
+
+# In Linear regression taking [Engine Hp] column as the feature we recieved the accuracy of the model as 50%.The accuracy increases if more number of features are used That is called Multiple Regression. 
+
+# In[71]:
+
+
+X_reg=X_val[['Engine Fuel Type','Engine HP','Engine Cylinders']]
+Y_reg=df.MSRP
+
+X_reg = sc_X.fit_transform(X_reg)
+from sklearn.model_selection import train_test_split
+X_reg_train, X_reg_test, y_reg_train, y_reg_test =  train_test_split(X_reg,y_reg,test_size = 0.2, random_state= 0)
+
+lm.fit(X_reg_train, y_reg_train)
+y_reg_pred=lm.predict(X_reg_test)
+print("r2_score")
+print(metrics.r2_score(y_reg_test,y_reg_pred)*100)
+print("mse")
+print(metrics.mean_squared_error(y_reg_test,y_reg_pred))
+
+
+# # PCA
+
+# Accuracy is increased by 1% 
+# This clearly means that the accuracy increases by taking more features into consideration,but as we have many features and most of them give the same accuracy which means that they can be reduced 
+
+# Also the way to optimize the algorithm is to apply PCA and fasten the results
+
+# PCA is effected by scale so there is a need to scale the features in the data before applying PCA.StandardScaler is used standardize the dataset’s features onto unit scale (mean = 0 and variance = 1) which is a requirement for the optimal performance of many machine learning algorithms
+
+# The data was standardize prior in this code.
+# The standardize data is:
+
+# After dimensionality reduction, there usually isn’t a particular meaning assigned to each principal component. The new components are just the two main dimensions of variation.
+
+# In[72]:
+
+
+X
+
+
+# In[73]:
+
+
+from sklearn.decomposition import PCA
+
+#There are 11 features let's reduce the dimension to 8
+
+pca = PCA(n_components=8)
+
+
+# In[74]:
+
+
+principalComponents = pca.fit_transform(X)
+
+
+# In[75]:
+
+
+p_Df = pd.DataFrame(data = principalComponents
+             , columns = ['principal component 1', 'principal component 2','principal component 3',
+                          'principal component 4','principal component 5','principal component 6','principal component 7',
+                          'principal component 8'])
+
+
+# In[76]:
+
+
+arr=pca.explained_variance_ratio_
+arr
+
+
+# In[77]:
+
+
+sum=0
+for val in arr:
+    val=(val*100)
+    sum +=val;
+    print(val)
+sum
+
+
+# These all components together give 93% of information rest of the information is in the other eigen vectors of the covariance matrix 
+
+# In[78]:
+
+
+p_Df.count()
+
+
+# In[79]:
+
+
+
+y.shape
+
+
+# In[80]:
+
+
+from sklearn.model_selection import train_test_split
+p_Df_train, p_Df_test, y_train, y_test =  train_test_split(X,y,test_size = 0.2, random_state= 0)
+
+
+# In[81]:
+
+
+
+lm = LinearRegression()
+
+lm.fit(p_Df_train , y_train)
+y_pred=lm.predict(p_Df_test)
+print("r2_score")
+print(metrics.r2_score(y_test,y_pred))
+print("mse")
+print(metrics.mean_squared_error(y_test,y_pred))
+
+
+# This means that its not only about increasing the features but its about increasing relevant features
+
+# 
+# Main limitation of Linear Regression is the assumption of linearity between the dependent variable and the independent 
+# variables. In the real world, the data is rarely linearly separable. It assumes that there is a straight-line relationship 
+# between the dependent and independent variables which is incorrect many times.
+
+# Linear Regression is great tool to analyze the relationships among the variables but it isn’t recommended for most practical 
+# applications because it over-simplifies real world problems by assuming linear relationship among the variables
+
+# # Decision Tree
+
+# In[82]:
+
+
+conda list
+
+
+# In[83]:
+
+
+from sklearn.tree import DecisionTreeRegressor
+import pickle
+
+
+# In[84]:
+
+
+regressor = DecisionTreeRegressor(max_depth=6,random_state = 0) 
+regressor1 = DecisionTreeRegressor(max_depth=6,min_samples_split=4,random_state = 0) 
+
+
+# In[85]:
+
+
+X_val.shape
+
+
+# In[86]:
+
+
+y.shape
+
+
+# In[87]:
+
+
+y.isnull().sum()
+
+
+# In[88]:
+
+
+from sklearn.model_selection import train_test_split
+X_val_train,X_val_test,y_train,y_test=train_test_split(X_val,y,test_size=0.2)
+
+
+# In[89]:
+
+
+X_val.columns
+
+
+# In[90]:
+
+
+X_val_train['Model'].nunique()
+
+
+# In[91]:
+
+
+regressor.fit(X_val_train,y_train)
+
+
+# In[92]:
+
+
+X_val.columns
+
+
+# In[93]:
+
+
+filename = "finalized_model.sav"
+
+
+# In[94]:
+
+
+pickle.dump(regressor, open(filename, 'wb'))
+
+
+# In[95]:
+
+
+loaded_model = pickle.load(open(filename, 'rb'))
+result = loaded_model.score(X_val_test, y_test)
+print(result)
+
+
+# In[96]:
+
+
+regressor1.fit(p_Df_train,y_train)
+
+
+# The above value is after implementation of PCA along with decision tree
+
+# In[97]:
+
+
+y_pred = regressor.predict(X_val_test) 
+print(y_pred)
+
+
+# In[98]:
+
+
+regressor.max_depth
+
+
+# In[99]:
+
+
+print("MSE", metrics.mean_squared_error(y_test, y_pred))
+print("r2_score",metrics.r2_score(y_test, y_pred))
+
+
+# In[100]:
+
+
+y_pred_pca = regressor1.predict(p_Df_test)
+
+
+# In[101]:
+
+
+print("MSE", metrics.mean_squared_error(y_test, y_pred_pca))
+print("r2_score",metrics.r2_score(y_test, y_pred_pca))
+
+
+# This also means decision tree overfit
+
+# R2  compares the fit of the chosen model with that of a horizontal straight line (the null hypothesis).
+# If the chosen model fits worse than a horizontal line, then R2 is negative
+# R2  is negative only when the chosen model does not follow the trend of the data, so fits worse than a horizontal line.
+
+# In[102]:
+
+
+from sklearn.externals.six import StringIO  
+from IPython.display import Image  
+from sklearn.tree import export_graphviz
+import pydotplus
+dot_data = StringIO()
+export_graphviz(regressor, out_file=dot_data,  
+                filled=True, rounded=True,
+                special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+Image(graph.create_png())
+
+
+# In[103]:
+
+
+from sklearn.externals.six import StringIO  
+from IPython.display import Image  
+from sklearn.tree import export_graphviz
+import pydotplus
+dot_data = StringIO()
+export_graphviz(regressor1, out_file=dot_data,  
+                filled=True, rounded=True,
+                special_characters=True)
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+Image(graph.create_png())
+
+
+# Greedy algorithms cannot guarantee to return the globally optimal decision tree. This can be mitigated by training multiple
+# trees, where the features and samples are randomly sampled with replacement.
+
+# Decision tree learners create biased trees if some classes dominate. It is therefore recommended to balance the data set prior
+# to fitting with the decision tree.
+
+# # SVM
+
+# In[104]:
+
+
+S=df.drop(['MSRP'],axis=1)
+t=df[['MSRP']]
+
+
+# In[105]:
+
+
+SC=sc_X.fit_transform(S)
+T=sc_X.fit_transform(t)
+
+
+# In[106]:
+
+
+SC_train,SC_test,T_train,T_test=train_test_split(SC,T)
+
+
+# In[107]:
+
+
+from sklearn.svm import SVR
+regressor_svm = SVR(kernel = 'rbf',gamma='scale')
+regressor_svm.fit(SC_train, T_train)
+
+
+# In[108]:
+
+
+y_pred_svm=regressor_svm.predict(SC_test)
+
+
+# In[109]:
+
+
+metrics.r2_score(T_test,y_pred_svm)
+
+
+# In[110]:
+
+
+metrics.mean_squared_error(T_test,y_pred_svm)
+
+
+# In[111]:
+
+
+principalComponents = pca.fit_transform(SC)
+
+
+# In[112]:
+
+
+p_Df = pd.DataFrame(data = principalComponents
+             , columns = ['principal component 1', 'principal component 2','principal component 3',
+                          'principal component 4','principal component 5','principal component 6','principal component 7',
+                          'principal component 8'])
+ndf=p_Df
+
+
+# In[113]:
+
+
+arr=pca.explained_variance_ratio_
+arr
+
+
+# In[114]:
+
+
+sum=0
+for val in arr:
+    val=(val*100)
+    sum +=val;
+    print(val)
+sum
+
+
+# In[115]:
+
+
+ndf_train,ndf_test,T_train,T_test=train_test_split(ndf,T)
+
+
+# In[116]:
+
+
+regressor_svm.fit(ndf_train, T_train)
+
+
+# In[117]:
+
+
+y_pred_svm=regressor_svm.predict(ndf_test)
+
+
+# In[118]:
+
+
+print(metrics.r2_score(T_test,y_pred_svm))
+metrics.mean_squared_error(T_test,y_pred_svm)
+
+
+# The value of mean square error is very low and better than Decision tree this clearly states that Decision Tree was under 
+# overfitting but still the accuracy was best therefore we should for decision tree by avoiding its shortcoming
+
+# # Random Forest
+
+# In[119]:
+
+
+R=df.drop(['MSRP'],axis=1)
+t=df[['MSRP']]
+
+
+# In[137]:
+
+
+R.columns
+
+
+# In[120]:
+
+
+RC=sc_X.fit_transform(R)
+T=sc_X.fit_transform(t)
+
+
+# In[121]:
+
+
+R_train,R_test,t_train,t_test=train_test_split(R,t)
+
+
+# In[122]:
+
+
+from sklearn.ensemble import RandomForestRegressor
+# Instantiate model with 1000 decision trees
+rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+# Train the model on training data
+rf.fit(R_train,t_train);
+
+
+# In[133]:
+
+
+filename = "finalizedrandom_model.sav"
+
+
+# In[134]:
+
+
+pickle.dump(rf, open(filename, 'wb'))
+
+
+# In[138]:
+
+
+loaded_model = pickle.load(open(filename, 'rb'))
+#result = loaded_model.score(R_test, t_test)
+#print(result)
+
+
+# In[123]:
+
+
+y_pred=rf.predict(R_test)
+
+
+# In[124]:
+
+
+metrics.mean_squared_error(t_test,y_pred)
+
+
+# In[125]:
+
+
+metrics.r2_score(t_test,y_pred)
+
+
+# In[126]:
+
+
+principalComponents = pca.fit_transform(RC)
+
+
+# In[127]:
+
+
+p_Df = pd.DataFrame(data = principalComponents
+             , columns = ['principal component 1', 'principal component 2','principal component 3',
+                          'principal component 4','principal component 5','principal component 6','principal component 7',
+                          'principal component 8'])
+rdf=p_Df
+
+
+# In[128]:
+
+
+rdf_train,rdf_test,T_train,T_test=train_test_split(rdf,T)
+
+
+# In[129]:
+
+
+rf.fit(rdf_train,T_train);
+
+
+# In[130]:
+
+
+y_pred_rf=rf.predict(rdf_test)
+
+
+# In[131]:
+
+
+metrics.mean_squared_error(T_test,y_pred_rf)
+
+
+# In[132]:
+
+
+metrics.r2_score(T_test,y_pred_rf)
+
+
+# This clearly proves that Random forest is best amongst all as it has the least mean square error and the highest score and
+# also overcomes the limitations or the problems by decision tree
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+
+# In[ ]:
+
+
+
+
